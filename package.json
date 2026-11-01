@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node tests/app.cjs && node tests/counter.mjs",
+    "test": "node tests/app.cjs && node tests/results.cjs && node tests/counter.mjs",
     "test:all": "npm test && node tests/combinations.cjs"
   }
 }
