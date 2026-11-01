@@ -1,0 +1,14 @@
+{
+  "name": "kakoy-ty-kotik",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pixel cat quiz: six questions and 236544 deterministic cats",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node tests/app.cjs && node tests/counter.mjs",
+    "test:all": "npm test && node tests/combinations.cjs"
+  }
+}

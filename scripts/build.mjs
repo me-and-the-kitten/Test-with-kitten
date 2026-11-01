@@ -1,0 +1,5 @@
+import {readFileSync,writeFileSync,copyFileSync,cpSync,mkdirSync} from 'node:fs';import {fileURLToPath} from 'node:url';import path from 'node:path';
+const root=fileURLToPath(new URL('../',import.meta.url)),src=path.join(root,'src'),out=path.join(root,'docs');mkdirSync(out,{recursive:true});
+let html=readFileSync(path.join(src,'page.html'),'utf8').replace('<style>__STYLE__</style>','<link rel="stylesheet" href="style.css">').replace('<script>__PIXEL__</script>','<script src="pixel.js"></script>').replace('<script>__QUIZ__</script>','<script src="quiz.js"></script>').replace('<script>__UI__</script>','<script src="pixel-font.js"></script><script src="app.js"></script>');
+if(/__(?:STYLE|PIXEL|QUIZ|UI)__/.test(html))throw Error('Unresolved template marker');writeFileSync(path.join(out,'index.html'),html);
+for(let file of ['style.css','pixel.js','pixel-font.js','quiz.js','app.js'])copyFileSync(path.join(src,file),path.join(out,file));cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});writeFileSync(path.join(out,'.nojekyll'),'');console.log('Built docs/: static HTML, CSS, JS and four original photographs.');
